@@ -8,3 +8,7 @@
 /SortMusic/DAO/bin/Debug/netstandard2.0
 /SortMusic/BuisnessObject/bin/Debug/netstandard2.0
 /SortMusic/BuisnessObject/obj
+
+SortMusic/UnitTest/bin/
+
+SortMusic/UnitTest/obj/

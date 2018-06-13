@@ -39,7 +39,7 @@ namespace UnitTest
         [TestMethod]
         public void GetMusicDetails_Test_OK()
         {
-            Music expectedMusic = new Music() { Title = "test", FileName = "test.mp3", Artists = new List<string>() { "Maxime" }, Duration =  7,};
+            Music expectedMusic = new Music() { Title = "test", FileName = "test.mp3", Artists = new List<string>() { "Maxime" }, Duration =  7, Genres = new List<string>() { "Pop" }, };
             Music actualMusic = new MusicDAO().GetMusicDetails("test.mp3");
 
             Assert.AreEqual(expectedMusic, actualMusic);
@@ -48,7 +48,7 @@ namespace UnitTest
         [TestMethod]
         public void GetMusicDetails_Test_KO_Title()
         {
-            Music expectedMusic = new Music() { Title = "test5", FileName = "test.mp3", Artists = new List<string>() { "Maxime" }, Duration = 7, };
+            Music expectedMusic = new Music() { Title = "test5", FileName = "test.mp3", Artists = new List<string>() { "Maxime" }, Duration = 7, Genres = new List<string>() { "Pop" }, };
             Music actualMusic = new MusicDAO().GetMusicDetails("test.mp3");
 
             Assert.AreNotEqual(expectedMusic, actualMusic);
@@ -57,7 +57,7 @@ namespace UnitTest
         [TestMethod]
         public void GetMusicDetails_Test_KO_Artists()
         {
-            Music expectedMusic = new Music() { Title = "test", FileName = "test.mp3", Artists = new List<string>() { "Michel" }, Duration = 7, };
+            Music expectedMusic = new Music() { Title = "test", FileName = "test.mp3", Artists = new List<string>() { "Michel" }, Duration = 7, Genres = new List<string>() { "Pop" }, };
             Music actualMusic = new MusicDAO().GetMusicDetails("test.mp3");
 
             Assert.AreNotEqual(expectedMusic, actualMusic);
@@ -66,12 +66,20 @@ namespace UnitTest
         [TestMethod]
         public void GetMusicDetails_Test_KO_Duration()
         {
-            Music expectedMusic = new Music() { Title = "test", FileName = "test.mp3", Artists = new List<string>() { "Maxime" }, Duration = 6, };
+            Music expectedMusic = new Music() { Title = "test", FileName = "test.mp3", Artists = new List<string>() { "Maxime" }, Duration = 6, Genres = new List<string>() { "Pop" }, };
             Music actualMusic = new MusicDAO().GetMusicDetails("test.mp3");
 
             Assert.AreNotEqual(expectedMusic, actualMusic);
         }
 
+        [TestMethod]
+        public void GetMusicDetails_Test_KO_Genres()
+        {
+            Music expectedMusic = new Music() { Title = "test", FileName = "test.mp3", Artists = new List<string>() { "Maxime" }, Duration = 6, Genres = new List<string>() { "Rock" }, };
+            Music actualMusic = new MusicDAO().GetMusicDetails("test.mp3");
+
+            Assert.AreNotEqual(expectedMusic, actualMusic);
+        }
         #endregion
     }
 }

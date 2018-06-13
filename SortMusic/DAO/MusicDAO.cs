@@ -46,6 +46,7 @@ namespace DAO
             {
                 music.Duration = Constantes.TimeSpanToSecond(file.Properties.Duration);
                 music.Artists = new List<string>(file.Tag.AlbumArtists);
+                music.Genres = new List<string>(file.Tag.Genres);
             }
 
             return music;
@@ -69,6 +70,13 @@ namespace DAO
                 if(!music.Artists.SequenceEqual(new List<string>(file.Tag.Performers)))
                 {
                     file.Tag.Performers = music.Artists.ToArray();
+                    modification = true;
+                }
+
+                if(!music.Genres.SequenceEqual(new List<string>(file.Tag.Genres)))
+                {
+                    file.Tag.Genres = null;
+                    file.Tag.Genres = music.Genres.ToArray();
                     modification = true;
                 }
 
