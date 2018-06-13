@@ -1,0 +1,10 @@
+﻿################################################################################
+# Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
+################################################################################
+
+/SortMusic/SortMusic/obj
+/SortMusic/SortMusic/bin/Debug/netcoreapp2.0
+/SortMusic/DAO/obj
+/SortMusic/DAO/bin/Debug/netstandard2.0
+/SortMusic/BuisnessObject/bin/Debug/netstandard2.0
+/SortMusic/BuisnessObject/obj
