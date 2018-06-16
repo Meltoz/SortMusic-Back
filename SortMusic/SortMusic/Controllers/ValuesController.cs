@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DAO;
 using Microsoft.AspNetCore.Mvc;
+using Helper;
 
 namespace SortMusic.Controllers
 {
@@ -15,7 +16,7 @@ namespace SortMusic.Controllers
         public IActionResult Get()
         {
             new ConfigurationDAO().GetStyle();
-            return Ok();
+            return Ok(CstSortMusic.Instance.Styles);
             
             //return Ok(new MusicDAO().GetMusicName(PathFolder));
         }

@@ -8,26 +8,36 @@ namespace DAO
 {
     public class ConfigurationDAO
     {
-        public List<string> GetStyle()
+        public void GetStyle()
         {
-            List<string> styles = new List<string>();
-
-            using (StreamReader reader = new StreamReader(CstSortMusic.Instance.PathConfigurationFile))
+            if (CstSortMusic.Instance.Styles.Count == 0)
             {
-                string line = string.Empty;
+                List<string> styles = new List<string>();
 
-               while((line = reader.ReadLine())!= null)
+                using (StreamReader reader = new StreamReader(CstSortMusic.Instance.PathConfigurationFile))
                 {
-                    styles.Add(line);
-                }
-            }
+                    string line = reader.ReadLine();
 
-            return styles;
+                    while (line != null)
+                    {
+                        styles.Add(line);
+                        line = reader.ReadLine();
+                    }
+                }
+
+                CstSortMusic.Instance.Styles = styles;
+            }
         }
 
-        public void AddStyle(string element)
+        public void SaveStyle()
         {
-
+            using (StreamWriter writer = new StreamWriter(CstSortMusic.Instance.PathConfigurationFile, false, System.Text.Encoding.UTF8))
+            {
+                CstSortMusic.Instance.Styles.ForEach(s =>
+                {
+                    writer.WriteLine(s);
+                });
+            }
         }
     }
 }

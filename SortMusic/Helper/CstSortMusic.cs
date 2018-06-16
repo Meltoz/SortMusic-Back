@@ -16,7 +16,7 @@ namespace Helper
         {
             Folder = @"D:\Test\";
             Styles = new List<string>();
-            PathConfigurationFile = @"D:\Programmation\C#\Repo\SortMusic-Back\SortMusic\SortMusic\App_Data\style.txt";
+            PathConfigurationFile = @"./../SortMusic/App_Data/style.txt";
         }
 
         public static CstSortMusic Instance

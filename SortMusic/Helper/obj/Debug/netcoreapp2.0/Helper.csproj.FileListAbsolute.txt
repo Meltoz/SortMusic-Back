@@ -1,9 +1,0 @@
-D:\Programmation\C#\Repo\SortMusic-Back\SortMusic\Helper\bin\Debug\netcoreapp2.0\Helper.deps.json
-D:\Programmation\C#\Repo\SortMusic-Back\SortMusic\Helper\bin\Debug\netcoreapp2.0\Helper.dll
-D:\Programmation\C#\Repo\SortMusic-Back\SortMusic\Helper\bin\Debug\netcoreapp2.0\Helper.pdb
-D:\Programmation\C#\Repo\SortMusic-Back\SortMusic\Helper\obj\Debug\netcoreapp2.0\Helper.csproj.CoreCompileInputs.cache
-D:\Programmation\C#\Repo\SortMusic-Back\SortMusic\Helper\obj\Debug\netcoreapp2.0\Helper.AssemblyInfoInputs.cache
-D:\Programmation\C#\Repo\SortMusic-Back\SortMusic\Helper\obj\Debug\netcoreapp2.0\Helper.AssemblyInfo.cs
-D:\Programmation\C#\Repo\SortMusic-Back\SortMusic\Helper\obj\Debug\netcoreapp2.0\Helper.dll
-D:\Programmation\C#\Repo\SortMusic-Back\SortMusic\Helper\obj\Debug\netcoreapp2.0\Helper.pdb
-D:\Programmation\C#\Repo\SortMusic-Back\SortMusic\Helper\obj\Debug\netcoreapp2.0\Helper.csprojAssemblyReference.cache
