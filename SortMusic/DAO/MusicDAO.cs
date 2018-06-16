@@ -4,8 +4,9 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Text;
 using BuisnessObject;
-using BuisnessObject.Helper;
+using Helper;
 using System.Linq;
+
 
 namespace DAO
 {
@@ -21,7 +22,7 @@ namespace DAO
             List<string> musicName = new List<string>();
             string pattern = @"(.*)\\(.*)\.mp3";
 
-            foreach(string filePath in Directory.GetFiles(Constantes.Folder))
+            foreach (string filePath in Directory.GetFiles(CstSortMusic.Instance.Folder))
             {
                 Match regEx = Regex.Match(filePath, pattern);
                 musicName.Add(regEx.Groups[2].Value);
@@ -42,38 +43,38 @@ namespace DAO
             Music music = new Music();
             music.FileName = musicName;
             music.Title = regex.Groups[1].Value;
-            using (TagLib.File file = TagLib.File.Create(Constantes.Folder + musicName))
+            using (TagLib.File file = TagLib.File.Create(CstSortMusic.Instance.Folder + musicName))
             {
-                music.Duration = Constantes.TimeSpanToSecond(file.Properties.Duration);
+                music.Duration = Util.TimeSpanToSecond(file.Properties.Duration);
                 music.Artists = new List<string>(file.Tag.AlbumArtists);
                 music.Genres = new List<string>(file.Tag.Genres);
             }
 
             return music;
         }
-        
+
         /// <summary>
         /// Permet d'enregister les métadonnées d'une musique
         /// </summary>
         /// <param name="music"></param>
         public void SaveMusic(Music music)
         {
-            using (TagLib.File file = TagLib.File.Create(Constantes.Folder + music.FileName))
+            using (TagLib.File file = TagLib.File.Create(CstSortMusic.Instance.Folder + music.FileName))
             {
                 bool modification = false;
-                if(!music.Title.Equals(file.Tag.Title))
+                if (!music.Title.Equals(file.Tag.Title))
                 {
                     file.Tag.Title = music.Title;
                     modification = true;
                 }
 
-                if(!music.Artists.SequenceEqual(new List<string>(file.Tag.Performers)))
+                if (!music.Artists.SequenceEqual(new List<string>(file.Tag.Performers)))
                 {
                     file.Tag.Performers = music.Artists.ToArray();
                     modification = true;
                 }
 
-                if(!music.Genres.SequenceEqual(new List<string>(file.Tag.Genres)))
+                if (!music.Genres.SequenceEqual(new List<string>(file.Tag.Genres)))
                 {
                     file.Tag.Genres = null;
                     file.Tag.Genres = music.Genres.ToArray();
@@ -81,7 +82,9 @@ namespace DAO
                 }
 
                 if (modification)
+                {
                     file.Save();
+                }
             }
         }
 

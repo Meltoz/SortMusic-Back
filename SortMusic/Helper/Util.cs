@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BuisnessObject.Helper
+namespace Helper
 {
-    public class Constantes
+    public class Util
     {
-        public const string Folder = @"D:\Test\";
-
         public static int TimeSpanToSecond(TimeSpan ts)
         {
             int secondsTotal = ts.Minutes * 60;

@@ -14,7 +14,7 @@ namespace SortMusic.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            new MusicDAO().GetMusicDetails("test.mp3");
+            new ConfigurationDAO().GetStyle();
             return Ok();
             
             //return Ok(new MusicDAO().GetMusicName(PathFolder));
