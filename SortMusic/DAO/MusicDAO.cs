@@ -35,7 +35,7 @@ namespace DAO
         /// </summary>
         /// <param name="musicName">Titre de la musique (e.g : test.mp3)</param>
         /// <returns>Details de la musique</returns>
-        public Music GetMusicDetails(string musicName)
+        public Music GetMusicByTitle(string musicName)
         {
             string pattern = @"(.*)\.mp3";
             Match regex = Regex.Match(musicName, pattern);
@@ -46,8 +46,8 @@ namespace DAO
             using (TagLib.File file = TagLib.File.Create(CstSortMusic.Instance.Folder + musicName))
             {
                 music.Duration = Util.TimeSpanToSecond(file.Properties.Duration);
-                music.Artists = new List<string>(file.Tag.AlbumArtists);
-                music.Genres = new List<string>(file.Tag.Genres);
+                music.Artists = file.Tag.AlbumArtists != null ? new List<string>(file.Tag.AlbumArtists) : new List<string>();
+                music.Genres = file.Tag.Genres != null ? new List<string>(file.Tag.Genres) : new List<string>();
             }
 
             return music;
@@ -56,7 +56,7 @@ namespace DAO
         /// <summary>
         /// Permet d'enregister les métadonnées d'une musique
         /// </summary>
-        /// <param name="music"></param>
+        /// <param name="music">Musique a sauvegarder</param>
         public void SaveMusic(Music music)
         {
             using (TagLib.File file = TagLib.File.Create(CstSortMusic.Instance.Folder + music.FileName))
@@ -70,7 +70,7 @@ namespace DAO
 
                 if (!music.Artists.SequenceEqual(new List<string>(file.Tag.Performers)))
                 {
-                    file.Tag.Performers = music.Artists.ToArray();
+                    file.Tag.AlbumArtists = music.Artists.ToArray();
                     modification = true;
                 }
 
@@ -88,5 +88,36 @@ namespace DAO
             }
         }
 
+        /// <summary>
+        /// Permet d'obtenir la liste des musiques du dossiers
+        /// </summary>
+        /// <returns></returns>
+        public List<Music> All()
+        {
+            List<Music> musics = new List<Music>();
+            string pattern = @"(.*)\\(.*)\.mp3";
+
+            Directory.GetFiles(CstSortMusic.Instance.Folder).ToList().ForEach(filePath =>
+            {
+
+                Match regex = Regex.Match(filePath, pattern);
+                Music m = new Music
+                {
+                    Title = regex.Groups[2].Value,
+                };
+                m.FileName = m.Title + ".mp3";
+
+                using (TagLib.File file = TagLib.File.Create(CstSortMusic.Instance.Folder + m.FileName))
+                {
+                    m.Duration = Util.TimeSpanToSecond(file.Properties.Duration);
+                    m.Artists = file.Tag.AlbumArtists != null ? new List<string>(file.Tag.AlbumArtists) : new List<string>();
+                    m.Genres = file.Tag.Genres != null ? new List<string>(file.Tag.Genres) : new List<string>();
+                }
+                musics.Add(m);
+
+            });
+
+            return musics;
+        }
     }
 }

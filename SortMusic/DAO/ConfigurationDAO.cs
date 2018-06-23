@@ -8,7 +8,11 @@ namespace DAO
 {
     public class ConfigurationDAO
     {
-        public void GetStyle()
+
+        /// <summary>
+        /// Permet d'obtenir la listes des différents style de musique a partir du fichier plat
+        /// </summary>
+        public static void GetStyle()
         {
             if (CstSortMusic.Instance.Styles.Count == 0)
             {
@@ -29,7 +33,10 @@ namespace DAO
             }
         }
 
-        public void SaveStyle()
+        /// <summary>
+        /// Permet de sauvegarder les différents style de musique dans un fichier plat
+        /// </summary>
+        public static void SaveStyle()
         {
             using (StreamWriter writer = new StreamWriter(CstSortMusic.Instance.PathConfigurationFile, false, System.Text.Encoding.UTF8))
             {

@@ -19,7 +19,7 @@ namespace SortMusic.Controllers
         {
             if(CstSortMusic.Instance.Styles.Count == 0)
             {
-                new ConfigurationDAO().GetStyle();
+                ConfigurationDAO.GetStyle();
             }
 
             return Ok(CstSortMusic.Instance.Styles);
@@ -32,15 +32,30 @@ namespace SortMusic.Controllers
             if(!CstSortMusic.Instance.Styles.Contains(style) && !string.IsNullOrEmpty(style))
             {
                 CstSortMusic.Instance.Styles.Add(style);
-                new ConfigurationDAO().SaveStyle();
+                ConfigurationDAO.SaveStyle();
                 return Ok();
             }
             else
             {
                 return BadRequest();
             }
+        }
 
+        [HttpDelete]
+        [Route("remove")]
+        public IActionResult Supprimer_Style([FromQuery]string style)
+        {
+            if(CstSortMusic.Instance.Styles.Contains(style))
+            {
+                CstSortMusic.Instance.Styles.Remove(style);
+                ConfigurationDAO.SaveStyle();
 
+                return NoContent();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
      
